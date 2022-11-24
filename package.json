@@ -1,27 +1,18 @@
 {
-    "name": "flat-file-validator",
-    "description": "Flat File Validator",
-    "version": "1.0.0",
-    "main": "app/index.js",
-    "license": "MIT",
-    "scripts": {
-        "type-check": "tsc --noEmit",
-        "type-check:watch": "npm run type-check -- --watch",
-        "build": "npm run build:types && npm run build:js",
-        "build:types": "tsc --emitDeclarationOnly",
-        "build:js": "babel src --out-dir app --extensions \".ts,.tsx\" --source-maps inline --copy-files",
-        "test": "live-server --open=./app/index.html",
-        "start": "npm run build:types && npm run build:js && npm run test"
-    },
-    "dependencies": {
-        "typescript": "^4.8.4"
-    },
-    "devDependencies": {
-        "live-server": "^1.2.2",
-        "@babel/cli": "^7.8.3",
-        "@babel/core": "^7.8.3",
-        "@babel/plugin-proposal-class-properties": "^7.8.3",
-        "@babel/preset-env": "^7.8.3",
-        "@babel/preset-typescript": "^7.8.3"
-    }
+  "name": "flat-file-validator",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.4",
+    "vite": "^3.2.3"
+  },
+  "dependencies": {
+    "@ui5/webcomponents": "^1.9.1"
+  }
 }

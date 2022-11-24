@@ -1,7 +1,9 @@
+import * as fileConv from "./fileConv";
+import * as struct from "./struct";
 let message: string = 'Hello, World!';
 console.log(message);
 
-const fileStructure: fileStructure = {
+const fileStructure: struct.fileStructure = {
   recordTypeLength: 3,
   recordTypePos: 1,
   recordTypes: [{
@@ -16,7 +18,7 @@ const fileStructure: fileStructure = {
   ]
 };
 
-const fileStructureEnhanced = enhanceFileStructure(fileStructure);
+const fileStructureEnhanced = struct.enhanceFileStructure(fileStructure);
 const element = document.createElement("div");
 element.innerHTML = JSON.stringify(fileStructureEnhanced);
 document.body.appendChild(element);
@@ -24,5 +26,6 @@ document.body.appendChild(element);
 const file = `RT1BLA1
 RT2BLABLUB`;
 
-const lines = xfileToArray(file);
+const lines = fileConv.fileToRows(file);
 console.log(lines);
+

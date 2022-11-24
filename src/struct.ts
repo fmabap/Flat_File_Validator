@@ -1,4 +1,4 @@
-interface fileStructure {
+export interface fileStructure {
     recordTypePos: number,
     recordTypeLength: number,
     recordTypes: {
@@ -12,7 +12,7 @@ interface fileStructure {
         }[]
     }[]
 }
-interface fieldEnhanced {
+export interface fieldEnhanced {
     id: string,
     pos: number
     length: number
@@ -20,19 +20,19 @@ interface fieldEnhanced {
     allowedValues?: Array<string>,
     regex?: string
 }
-interface recordTypeEnhanced {
+export interface recordTypeEnhanced {
     id: string,
     length: number,
     fields: fieldEnhanced[]
 }
 
-interface fileStructureEnhanced {
+export interface fileStructureEnhanced {
     recordTypePos: number,
     recordTypeLength: number,
     recordTypes: recordTypeEnhanced[]
 }
 
-function enhanceFileStructure(fileStructure: fileStructure): fileStructureEnhanced {
+export function enhanceFileStructure(fileStructure: fileStructure): fileStructureEnhanced {
     const fileStructureEnhanced: fileStructureEnhanced = {
         recordTypePos: fileStructure.recordTypePos,
         recordTypeLength: fileStructure.recordTypeLength,
@@ -64,8 +64,5 @@ function enhanceFileStructure(fileStructure: fileStructure): fileStructureEnhanc
     })
     return fileStructureEnhanced;
 }
-function fileToArray(file:string):string[]{
-    const lines = file.split("\n");
-    return lines;
-    }
+
 
