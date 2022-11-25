@@ -1,37 +1,5 @@
-export interface fileStructure {
-    recordTypePos: number,
-    recordTypeLength: number,
-    recordTypes: {
-        id: string,
-        fields: {
-            id: string,
-            length: number
-            obligatory?: boolean,
-            allowedValues?: Array<string>,
-            regex?: string
-        }[]
-    }[]
-}
-export interface fieldEnhanced {
-    id: string,
-    pos: number
-    length: number
-    obligatory?: boolean,
-    allowedValues?: Array<string>,
-    regex?: string
-}
-export interface recordTypeEnhanced {
-    id: string,
-    length: number,
-    fields: fieldEnhanced[]
-}
 
-export interface fileStructureEnhanced {
-    recordTypePos: number,
-    recordTypeLength: number,
-    recordTypes: recordTypeEnhanced[]
-}
-
+import {fileStructure,fileStructureEnhanced, recordTypeEnhanced, fieldEnhanced }   from "./types";
 export function enhanceFileStructure(fileStructure: fileStructure): fileStructureEnhanced {
     const fileStructureEnhanced: fileStructureEnhanced = {
         recordTypePos: fileStructure.recordTypePos,
@@ -52,6 +20,8 @@ export function enhanceFileStructure(fileStructure: fileStructure): fileStructur
                 id: field.id,
                 pos: curPos,
                 length: field.length,
+                subStringStart: curPos - 1,
+                subStringEnd: curPos - 1 +  field.length, // last sign is exclusive
                 obligatory: field.obligatory,
                 allowedValues: field.allowedValues,
                 regex: field.regex

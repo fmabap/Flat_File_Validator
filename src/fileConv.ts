@@ -1,15 +1,11 @@
 
-export interface row {
-    rowNumber: number
-    content: string
-}
 
-
-export function fileToRows(file: string): row[] {
-    const rows: row[] = [];
+import {record} from "./types";
+export function fileToRecords(file: string): record[] {
+    const rows: record[] = [];
     const lines = file.split("\n");
     lines.forEach((line, index) => {
-        const row: row = { rowNumber: index + 1, content: line };
+        const row: record = { rowNumber: index + 1, value: line };
         rows.push(row);
     })
     return rows;
