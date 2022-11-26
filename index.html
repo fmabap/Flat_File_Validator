@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flat File Validator</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flat File Validator</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.ts"></script>
+  <ui5-title>Flat File Validator</ui5-title>
+  <br>
+  <br>
+  <ui5-label>JSON File Structure</ui5-label>
+  <ui5-textarea id="fileStructure" growing="true" rows="10"></ui5-textarea>
+  <br>
+  <br>
+  <ui5-label>File content</ui5-label>
+  <ui5-textarea id="fileContent" growing="true" rows="10"></ui5-textarea>
+  <br>
+  <br>
+  <ui5-button id="demo">Fill with demo data</ui5-button>
+  <ui5-button id="validate" design ="Emphasized">Validate</ui5-button>
+  <br>
+  <br>
+  <ui5-label>Result</ui5-label>
+  <ui5-textarea id="result" growing="true" rows="10"></ui5-textarea>
+</body>
+
 </html>
