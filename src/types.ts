@@ -48,6 +48,7 @@ export interface recordValidated{
 rowNumber: number,
 hasError: boolean,
 recordType: string,
+isUnknownRecordType: boolean,
 fields:fieldValidated[],
 rest: string,
 errors: string[]
