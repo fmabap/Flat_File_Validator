@@ -15,19 +15,23 @@ import "@ui5/webcomponents/dist/TableCell";
 import "@ui5/webcomponents/dist/Panel";
 import "@ui5/webcomponents/dist/Checkbox";
 
-const ui5BtnDemo: any = document.getElementById("demo");
-ui5BtnDemo.addEventListener("click", () => {
-  setDemoData();
-});
 
-const ui5BtnValidate: any = document.getElementById("validate");
-ui5BtnValidate.addEventListener("click", () => {
-  validate();
-});
+window.addEventListener("load", () => {init()});
 
-const fileStructureSchema: any = document.getElementById("fileStructureSchema");
-fileStructureSchema.value = 
-`{
+function init() {
+  const ui5BtnDemo: any = document.getElementById("demo");
+  ui5BtnDemo.addEventListener("click", () => {
+    setDemoData();
+  });
+
+  const ui5BtnValidate: any = document.getElementById("validate");
+  ui5BtnValidate.addEventListener("click", () => {
+    validate();
+  });
+
+  const fileStructureSchema: any = document.getElementById("fileStructureSchema");
+  fileStructureSchema.value =
+    `{
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description": "Flat File Validator JSON Schema for File Structure",
   "type": "object",
@@ -95,7 +99,7 @@ fileStructureSchema.value =
     "recordTypes"
   ]
 }`
-
+}
 function validate() {
   const textAreaFileStructure: any = document.getElementById("fileStructure");
   const textAreaFileContent: any = document.getElementById("fileContent");

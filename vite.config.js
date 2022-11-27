@@ -5,9 +5,6 @@ export default defineConfig({
     // config options
     base:"./",
     build: {
-        outDir: "./docs",
-        cssCodeSplit: false,
-    },
-    
-	
+        outDir: "./docs"
+    }
   });
