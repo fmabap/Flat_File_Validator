@@ -25,6 +25,77 @@ ui5BtnValidate.addEventListener("click", () => {
   validate();
 });
 
+const fileStructureSchema: any = document.getElementById("fileStructureSchema");
+fileStructureSchema.value = 
+`{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Flat File Validator JSON Schema for File Structure",
+  "type": "object",
+  "properties": {
+    "recordTypeLength": {
+      "type": "integer"
+    },
+    "recordTypePos": {
+      "type": "integer"
+    },
+    "recordTypes": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "fields": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "length": {
+                      "type": "integer"
+                    },
+                    "obligatory": {
+                      "type": "boolean"
+                    },
+                    "allowedValues": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "regex": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "length",
+                    "obligatory",
+                    "allowedValues",
+                    "regex"
+                  ]
+                }
+              ]
+            }
+          },
+          "required": [
+            "id",
+            "fields"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "recordTypeLength",
+    "recordTypePos",
+    "recordTypes"
+  ]
+}`
+
 function validate() {
   const textAreaFileStructure: any = document.getElementById("fileStructure");
   const textAreaFileContent: any = document.getElementById("fileContent");
