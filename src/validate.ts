@@ -3,7 +3,7 @@ import { getErrorMessage } from "./errorMsg";
 export function validateRecord(structExt: fileStructureEnhanced, record: record) {
     return new Promise<recordValidated>((resolve: any, _reject: any) => {
 
-        let recordValidated: recordValidated = { rowNumber: record.rowNumber, hasError: false, recordType: "", fields: [], rest: "", errors: [] };
+        let recordValidated: recordValidated = { rowNumber: record.rowNumber, hasError: false, recordType: "", isUnknownRecordType: false, fields: [], rest: "", errors: [] };
         // Get Record Type
         let recordTypeEnhanced: recordTypeEnhanced;
         try {
@@ -11,6 +11,7 @@ export function validateRecord(structExt: fileStructureEnhanced, record: record)
             if (recordTypeEnhanced === undefined) {
                 //Record is empty
                 recordValidated.recordType = "";
+                recordValidated.isUnknownRecordType = true;
                 recordValidated.rest = record.value;
                 resolve(recordValidated);
             }
@@ -18,6 +19,7 @@ export function validateRecord(structExt: fileStructureEnhanced, record: record)
         } catch (error) {
             //Unknow Record Type
             recordValidated.recordType = record.value.substring(structExt.recordTypePos - 1, structExt.recordTypePos - 1 + structExt.recordTypeLength);
+            recordValidated.isUnknownRecordType = true;
             recordValidated.rest = record.value;
             recordValidated.errors.push(getErrorMessage(error));
             recordValidated.hasError = true;
@@ -37,7 +39,7 @@ function validateFields(recordValidated: recordValidated, record: record, record
         let fieldValidated: fieldValidated = { id: field.id, value: record.value.substring(field.subStringStart, field.subStringEnd), errors: [] }
 
         // Check is obligatory
-        if (field.obligatory === true && fieldValidated.value === "") {
+        if (field.obligatory === true && containsStringOnlySpaces(fieldValidated.value) === true) {
             fieldValidated.errors.push("The Field is obligatory");
         }
 
@@ -77,7 +79,6 @@ function getRecordTypeEnhanced(record: record, structExt: fileStructureEnhanced)
         throw new Error(err);
     }
     const recordType: string = record.value.substring(structExt.recordTypePos - 1, structExt.recordTypePos - 1 + structExt.recordTypeLength);
-    console.log(recordType);
 
     const recordTypeEnhanced = getRecordTypeEnhancedFromArray(recordType, structExt)
 
@@ -91,3 +92,7 @@ function getRecordTypeEnhanced(record: record, structExt: fileStructureEnhanced)
 function getRecordTypeEnhancedFromArray(recordType: string, structExt: fileStructureEnhanced): recordTypeEnhanced {
     return structExt.recordTypes.find(element => element.id === recordType)!;
 }
+
+function containsStringOnlySpaces(str:string):boolean {
+    return /^\s*$/.test(str);
+  }

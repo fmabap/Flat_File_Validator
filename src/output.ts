@@ -1,6 +1,36 @@
 import { fileStructureEnhanced, recordTypeEnhanced, recordValidated } from "./types";
-export function getOutputTableForEachRecord(recordsValidated: recordValidated[], fileStructureEnhanced: fileStructureEnhanced, errorsOnly: boolean):string {
-    let output: string ="";
+
+export function getOutputTableGroupedByRecordType(recordsValidated: recordValidated[], fileStructureEnhanced: fileStructureEnhanced, errorsOnly: boolean): string {
+    let output: string = "";
+
+
+    fileStructureEnhanced.recordTypes.forEach(recordType => {
+        output = output + getTableDefinitionForRecordType(recordType)
+        recordsValidated.forEach(recordValidated => {
+            if (errorsOnly === true && recordValidated.hasError === false) {
+                return;
+            }
+            if (recordValidated.recordType === recordType.id) {
+                output = output + "\n" + getTableRowForRecordType(recordValidated);
+            }
+        }
+        );
+
+        output = output + "\n" + "</ui5-table>" + "\n" + "<BR>" + "<BR>" + "\n";
+    });
+
+    output = output + "\n";
+    output = output + getTableDefinitionForUnknownRecordType() + "\n";
+    recordsValidated.forEach(recordValidated => {
+        if (recordValidated.isUnknownRecordType === true) {
+            output = output + "\n" + getTableRowForUnknownRecordType(recordValidated);
+        }
+    });
+    output = output + "\n" + "</ui5-table>" + "\n" + "<BR>" + "<BR>" + "\n";
+    return output;
+}
+export function getOutputTableForEachRecord(recordsValidated: recordValidated[], fileStructureEnhanced: fileStructureEnhanced, errorsOnly: boolean): string {
+    let output: string = "";
 
     recordsValidated.forEach(recordValidated => {
         if (errorsOnly === true && recordValidated.hasError === false) {
@@ -11,34 +41,34 @@ export function getOutputTableForEachRecord(recordsValidated: recordValidated[],
 
         if (recordType === undefined) {
             // output unknown record type table
-            output = output + getTableDefinitionForUnknownRecordType()  + "\n" + getTableRowForUnknownRecordType(recordValidated);
-            output = output + "\n" + "</ui5-table>" + "\n" + "<BR>" + "<BR>" +"\n";
+            output = output + getTableDefinitionForUnknownRecordType() + "\n" + getTableRowForUnknownRecordType(recordValidated);
+            output = output + "\n" + "</ui5-table>" + "\n" + "<BR>" + "<BR>" + "\n";
         }
         else {
             // output record type table
             output = output + getTableDefinitionForRecordType(recordType) + "\n" + getTableRowForRecordType(recordValidated);
-            output = output + "\n" + "</ui5-table>" + "\n" + "<BR>" + "<BR>" +"\n";
+            output = output + "\n" + "</ui5-table>" + "\n" + "<BR>" + "<BR>" + "\n";
         }
     });
     return output;
 }
 
-function getTableDefinitionForUnknownRecordType():string{
+function getTableDefinitionForUnknownRecordType(): string {
     let output: string;
     // header
     const header: string = `<div class="header"><span style="color:red">Recordtype: Unknown</span></div>`
     const table: string = `
-<ui5-table stickyColumnHeader = "true"  >`;
+<ui5-table sticky-column-header = "true" no-data-text="No Data" >`;
     let columns: string[] = [];
 
     //columns
-    let column: string =`
+    let column: string = `
 <ui5-table-column slot="columns">
 <span style="line-height: 1.4rem" min-width="5rem" >RecNo</span>
 </ui5-table-column>
 `;
     columns.push(column);
-    
+
     column = `<ui5-table-column slot="columns">
 <span style="line-height: 1.4rem" min-width="10rem">RecordType</span>
 </ui5-table-column>
@@ -62,11 +92,11 @@ function getTableDefinitionForRecordType(recordType: recordTypeEnhanced): string
     // header
     const header: string = `<div class="header"><span>Recordtype: ${recordType.id}</span></div>`
     const table: string = `
-<ui5-table stickyColumnHeader = "true"  >`;
+<ui5-table sticky-column-header = "true" no-data-text="No Data" >`;
     let columns: string[] = [];
 
     //columns
-    let column: string =`
+    let column: string = `
 <ui5-table-column slot="columns">
 <span style="line-height: 1.4rem" min-width="5rem" >RecNo</span>
 </ui5-table-column>
@@ -116,7 +146,7 @@ function getTableRowForRecordType(recordValidated: recordValidated): string {
 
     let recordNumberCol: string;
     recordNumberCol = getColumnContentRowNumber(recordValidated);
-    
+
     let fieldCols: string[] = [];
     let fieldCol: string;
     recordValidated.fields.forEach(field => {
@@ -139,7 +169,7 @@ function getTableRowForRecordType(recordValidated: recordValidated): string {
         }
         fieldCols.push(fieldCol);
     });
-    
+
     const restCol = getColumnContentRest(recordValidated);
     output = rowStart + "\n" + recordNumberCol;
     fieldCols.forEach(element => { output = output + "\n" + element });
@@ -160,7 +190,7 @@ function getColumnContentRest(recordValidated: recordValidated): string {
 
 function getColumnContentDummyRecordType(recordValidated: recordValidated): string {
     let rest: string;
-            rest = `<ui5-table-cell><span style="color:red">${recordValidated.recordType}</span></ui5-table-cell>`
+    rest = `<ui5-table-cell><span style="color:red">${recordValidated.recordType}</span></ui5-table-cell>`
     return rest;
 }
 

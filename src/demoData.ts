@@ -36,6 +36,7 @@ const fileContent:string = `RT1BLA1
 RT2BLABLUB
 UNKNOW_RECORD_TYPE
 
+RT3T  T
 RT3TEST
 RT3TES`;
 const textAreaFileContent: any = document.getElementById("fileContent");
