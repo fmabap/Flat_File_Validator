@@ -10,3 +10,4 @@ This tool is a quick and dirty flat file validator.
  There is currently no validation of it (quick and dirty). So errors will occur in the console if something went wrong.
 
 
+## [Demo](https://fmabap.github.io/Flat_File_Validator/)
