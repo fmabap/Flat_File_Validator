@@ -7,6 +7,6 @@ This tool is a quick and dirty flat file validator.
  
  ## JSON file format
  You can find JSON file format (example data) when you click in the tool on the "Fill with demo data" button
- There is currently no validation of it (quick and dirty). So errors will occur in the console if something wents wrong.
- 
+ There is currently no validation of it (quick and dirty). So errors will occur in the console if something went wrong.
+
 
