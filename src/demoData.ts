@@ -1,4 +1,4 @@
-import { fileStructure, recordValidated } from "./types";
+import { fileStructure } from "./types";
 import "@ui5/webcomponents/dist/TextArea";
 
 export function setDemoData() {
@@ -32,9 +32,12 @@ function setDemoFileStructure() {
 }
 
 export function setDemoFile() {
-const fileContent = `RT1BLA1
+const fileContent:string = `RT1BLA1
 RT2BLABLUB
-RT3TEST`;
+UNKNOW_RECORD_TYPE
+
+RT3TEST
+RT3TES`;
 const textAreaFileContent: any = document.getElementById("fileContent");
 textAreaFileContent.value = fileContent;
 }

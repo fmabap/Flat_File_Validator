@@ -10,18 +10,22 @@ export function validateRecord(structExt: fileStructureEnhanced, record: record)
             recordTypeEnhanced = getRecordTypeEnhanced(record, structExt);
             if (recordTypeEnhanced === undefined) {
                 //Record is empty
-                recordValidated.recordType === ""
+                recordValidated.recordType = "";
+                recordValidated.rest = record.value;
                 resolve(recordValidated);
             }
 
         } catch (error) {
-            recordValidated.recordType = "";
+            //Unknow Record Type
+            recordValidated.recordType = record.value.substring(structExt.recordTypePos - 1, structExt.recordTypePos - 1 + structExt.recordTypeLength);
+            recordValidated.rest = record.value;
             recordValidated.errors.push(getErrorMessage(error));
             recordValidated.hasError = true;
             resolve(recordValidated);
         }
 
         //Validate the fields
+        recordValidated.recordType = recordTypeEnhanced!.id;
         validateFields(recordValidated, record, recordTypeEnhanced!);
         resolve(recordValidated);
     }

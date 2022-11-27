@@ -3,10 +3,15 @@ import * as struct from "./struct";
 import { fileStructure, recordValidated } from "./types";
 import { validateRecord } from "./validate";
 import { setDemoData } from "./demoData";
+import { getOutputTableForEachRecord } from "./output";
 import "@ui5/webcomponents/dist/TextArea";
 import "@ui5/webcomponents/dist/Button";
 import "@ui5/webcomponents/dist/Label";
 import "@ui5/webcomponents/dist/Title";
+import "@ui5/webcomponents/dist/Table";
+import "@ui5/webcomponents/dist/TableColumn";
+import "@ui5/webcomponents/dist/TableRow";
+import "@ui5/webcomponents/dist/TableCell";
 
 let message: string = 'Hello, World!';
 console.log(message);
@@ -24,7 +29,7 @@ ui5BtnValidate.addEventListener("click", () => {
 function validate() {
   const textAreaFileStructure: any = document.getElementById("fileStructure");
   const textAreaFileContent: any = document.getElementById("fileContent");
-  const fileStructure:fileStructure = JSON.parse(textAreaFileStructure.value);
+  const fileStructure: fileStructure = JSON.parse(textAreaFileStructure.value);
   const fileStructureEnhanced = struct.enhanceFileStructure(fileStructure);
   console.log(fileStructureEnhanced);
   const records = fileConv.fileToRecords(textAreaFileContent.value);
@@ -33,11 +38,16 @@ function validate() {
   let valPromises: Promise<recordValidated>[] = [];
 
   records.forEach(element => { valPromises.push(validateRecord(fileStructureEnhanced, element)) })
-  Promise.all(valPromises).then((recordsValidated) => { 
-        console.log(recordsValidated)
-        const textAreaResult: any = document.getElementById("result");
-        textAreaResult.value = JSON.stringify(recordsValidated,null,2);
-      });
+  Promise.all(valPromises).then((recordsValidated) => {
+    console.log(recordsValidated)
+   // const textAreaResult: any = document.getElementById("result");
+   // textAreaResult.value = JSON.stringify(recordsValidated, null, 2);
+    const output = getOutputTableForEachRecord(recordsValidated, fileStructureEnhanced, false);
+    console.log(output);
+    const divOutput: Element = document.getElementById("output")!;
+    divOutput.innerHTML = output!;
+
+  });
 
 }
 
