@@ -9,6 +9,6 @@ This [tool](https://fmabap.github.io/Flat_File_Validator/) is a quick and dirty 
  
  ## JSON file format
  You can find the JSON file format schema including example data in the [tool](https://fmabap.github.io/Flat_File_Validator/). 
- There is currently no validation of it (quick and dirty). You should use an external JSON schema validator. Errors will occur in the console if something went wrong.
+ You should use an external JSON schema validator. There is only an alert if the JSON could not be parsed.
  
  
