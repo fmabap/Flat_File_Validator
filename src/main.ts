@@ -103,7 +103,14 @@ function init() {
 function validate() {
   const textAreaFileStructure: any = document.getElementById("fileStructure");
   const textAreaFileContent: any = document.getElementById("fileContent");
-  const fileStructure: fileStructure = JSON.parse(textAreaFileStructure.value);
+  let fileStructure: fileStructure ;
+  try {
+     fileStructure = JSON.parse(textAreaFileStructure.value);
+  } catch (error) {
+    alert(error);
+    return;
+  }
+  
   const fileStructureEnhanced = struct.enhanceFileStructure(fileStructure);
 
   const records = fileConv.fileToRecords(textAreaFileContent.value);
