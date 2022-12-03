@@ -7,6 +7,10 @@
   <title>Flat File Validator</title>
   <style>
     .renderWhiteSpaces{white-space:pre-wrap}
+    .error{
+      background-color: red;
+      color: white;
+    }
   </style>
   <script type="module" src="/src/main.ts" defer></script>
 </head>
@@ -24,6 +28,7 @@
   <ui5-panel width="100%" accessible-role="Complementary" header-text="JSON File Structure" class="full-width">
   <ui5-label>JSON File Structure</ui5-label>
   <ui5-textarea id="fileStructure" growing="true" rows="5"></ui5-textarea>
+  
 </ui5-panel>
 
 <ui5-panel width="100%" accessible-role="Complementary" header-text="File Content" class="full-width">
@@ -32,7 +37,7 @@
 </ui5-panel>
   <ui5-panel width="100%" accessible-role="Complementary" header-text="Options and Actions" class="full-width">
     <ui5-checkbox id="chBShowOnlyErrors" text="Show only errors" checked></ui5-checkbox>
-    <ui5-checkbox id="chBGroupByRecordType" text="Group by Record Type" checked></ui5-checkbox>
+    <ui5-checkbox id="chBGroupByRecordType" text="Group by record type" checked></ui5-checkbox>
     <ui5-button id="demo">Fill with demo data</ui5-button>
     <ui5-button id="validate" design="Emphasized">Validate</ui5-button>
   </ui5-panel>

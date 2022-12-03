@@ -31,47 +31,57 @@ function init() {
 
   const fileStructureSchema: any = document.getElementById("fileStructureSchema");
   fileStructureSchema.value =
-    `{
+`{
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description": "Flat File Validator JSON Schema for File Structure",
   "type": "object",
   "properties": {
     "recordTypeLength": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Length of the record type"
     },
     "recordTypePos": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Position of the record type field starting with at 1"
     },
     "recordTypes": {
       "type": "array",
+      "description": "Array with all record types",
       "items": [
         {
           "type": "object",
           "properties": {
             "id": {
-              "type": "string"
+              "type": "string",
+              "description": "Id (name) of the record type"
             },
             "fields": {
               "type": "array",
+              "description": "Array with all fields of the record type, must be in the order left to right",
               "items": [
                 {
                   "type": "object",
                   "properties": {
                     "id": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "Id (name) of the field"
                     },
                     "length": {
-                      "type": "integer"
+                      "type": "integer",
+                      "description": "Length of the field"
                     },
                     "obligatory": {
-                      "type": "boolean"
+                      "type": "boolean",
+                      "description": "Flag (true / false) if a field is obligatory. If it is obligatory then it can not contain only spaces"
                     },
                     "allowedValues": {
                       "type": "array",
+                      "description": "An array with all allowedValues. If the array is empty then it will not be checked",
                       "items": {}
                     },
                     "regex": {
-                      "type": "string"
+                      "type": "string",
+                      "description": "A regex that the field content must match. If the regex is empty then it will not be checked. Please be aware that you have to enter it in JSON format. This means, that you have to escape for example a backslash with two backslashs"
                     }
                   },
                   "required": [
