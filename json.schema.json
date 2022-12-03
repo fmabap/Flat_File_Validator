@@ -5,11 +5,11 @@
   "properties": {
     "recordTypeLength": {
       "type": "integer",
-      "description": "Length of the record type"
+      "description": "Length of the record type field"
     },
     "recordTypePos": {
       "type": "integer",
-      "description": "Position of the record type field starting with at 1"
+      "description": "Position of the record type field in the records, starting from 1"
     },
     "recordTypes": {
       "type": "array",
@@ -24,7 +24,7 @@
             },
             "fields": {
               "type": "array",
-              "description": "Array with all fields of the record type, must be in the order left to right",
+              "description": "Array with all fields of the record type, it must be in the order left to right",
               "items": [
                 {
                   "type": "object",
@@ -39,7 +39,7 @@
                     },
                     "obligatory": {
                       "type": "boolean",
-                      "description": "Flag (true / false) if a field is obligatory it can not contain only spaces"
+                      "description": "Flag (true / false) if a field is obligatory. If it is obligatory then it can not contain only spaces"
                     },
                     "allowedValues": {
                       "type": "array",
