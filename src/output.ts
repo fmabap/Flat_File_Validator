@@ -149,6 +149,7 @@ function getTableRowForRecordType(recordValidated: recordValidated): string {
 
     let fieldCols: string[] = [];
     let fieldCol: string;
+    let fieldOutput: string;
     recordValidated.fields.forEach(field => {
         let errors: string = "";
         field.errors.forEach(error => {
@@ -160,11 +161,16 @@ function getTableRowForRecordType(recordValidated: recordValidated): string {
             }
         }
         );
+        fieldOutput = field.value;
         if (field.errors.length > 0) {
-            fieldCol = `<ui5-table-cell><span title ="${errors}" overflow="visible" class="renderWhiteSpaces error">${field.value}</span></ui5-table-cell>`
+            if (fieldOutput === "") {
+                // Show space for empty fields with error to have tooltip
+                fieldOutput = " ";
+            }
+            fieldCol = `<ui5-table-cell><span title ="${errors}" overflow="visible" class="renderWhiteSpaces error">${fieldOutput}</span></ui5-table-cell>`
         }
         else {
-            fieldCol = `<ui5-table-cell><span class="renderWhiteSpaces">${field.value}</span></ui5-table-cell>`
+            fieldCol = `<ui5-table-cell><span class="renderWhiteSpaces">${fieldOutput}</span></ui5-table-cell>`
         }
         fieldCols.push(fieldCol);
     });
