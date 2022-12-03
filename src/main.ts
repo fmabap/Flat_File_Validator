@@ -38,11 +38,11 @@ function init() {
   "properties": {
     "recordTypeLength": {
       "type": "integer",
-      "description": "Length of the record type"
+      "description": "Length of the record type field"
     },
     "recordTypePos": {
       "type": "integer",
-      "description": "Position of the record type field starting with at 1"
+      "description": "Position of the record type field in the records, starting from 1"
     },
     "recordTypes": {
       "type": "array",
