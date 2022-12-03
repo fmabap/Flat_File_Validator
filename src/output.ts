@@ -56,7 +56,7 @@ export function getOutputTableForEachRecord(recordsValidated: recordValidated[],
 function getTableDefinitionForUnknownRecordType(): string {
     let output: string;
     // header
-    const header: string = `<div class="header"><span style="color:red" class="renderWhiteSpaces">Recordtype: Unknown</span></div>`
+    const header: string = `<div class="header"><span class="renderWhiteSpaces error">Record Type: Unknown</span></div>`
     const table: string = `
 <ui5-table sticky-column-header = "true" no-data-text="No Data" >`;
     let columns: string[] = [];
@@ -90,7 +90,7 @@ function getTableDefinitionForUnknownRecordType(): string {
 function getTableDefinitionForRecordType(recordType: recordTypeEnhanced): string {
     let output: string;
     // header
-    const header: string = `<div class="header"><span class="renderWhiteSpaces">Recordtype: ${recordType.id}</span></div>`
+    const header: string = `<div class="header"><span class="renderWhiteSpaces">Record Type: ${recordType.id}</span></div>`
     const table: string = `
 <ui5-table sticky-column-header = "true" no-data-text="No Data" >`;
     let columns: string[] = [];
@@ -161,8 +161,7 @@ function getTableRowForRecordType(recordValidated: recordValidated): string {
         }
         );
         if (field.errors.length > 0) {
-            console.log(errors);
-            fieldCol = `<ui5-table-cell><span style="color:red" title ="${errors}" overflow="visible" class="renderWhiteSpaces">${field.value}</span></ui5-table-cell>`
+            fieldCol = `<ui5-table-cell><span title ="${errors}" overflow="visible" class="renderWhiteSpaces error">${field.value}</span></ui5-table-cell>`
         }
         else {
             fieldCol = `<ui5-table-cell><span class="renderWhiteSpaces">${field.value}</span></ui5-table-cell>`
@@ -180,7 +179,7 @@ function getTableRowForRecordType(recordValidated: recordValidated): string {
 function getColumnContentRest(recordValidated: recordValidated): string {
     let rest: string;
     if (recordValidated.rest !== "") {
-        rest = `<ui5-table-cell><span style="color:red" class="renderWhiteSpaces">${recordValidated.rest}</span></ui5-table-cell>`
+        rest = `<ui5-table-cell><span class="renderWhiteSpaces error">${recordValidated.rest}</span></ui5-table-cell>`
     }
     else {
         rest = `<ui5-table-cell><span class="renderWhiteSpaces">${recordValidated.rest}</span></ui5-table-cell>`
@@ -190,7 +189,7 @@ function getColumnContentRest(recordValidated: recordValidated): string {
 
 function getColumnContentDummyRecordType(recordValidated: recordValidated): string {
     let rest: string;
-    rest = `<ui5-table-cell><span style="color:red" class="renderWhiteSpaces">${recordValidated.recordType}</span></ui5-table-cell>`
+    rest = `<ui5-table-cell><span class="renderWhiteSpaces error">${recordValidated.recordType}</span></ui5-table-cell>`
     return rest;
 }
 
@@ -207,7 +206,7 @@ function getColumnContentRowNumber(recordValidated: recordValidated): string {
     }
     )
     if (recordValidated.errors.length > 0) {
-        recordNumber = `<ui5-table-cell><span style="color:red" class="renderWhiteSpaces" title ="${genErrors}">${recordValidated.rowNumber}</span></ui5-table-cell>`
+        recordNumber = `<ui5-table-cell><span class="renderWhiteSpaces error" title ="${genErrors}">${recordValidated.rowNumber}</span></ui5-table-cell>`
     }
     else {
         recordNumber = `<ui5-table-cell><span class="renderWhiteSpaces">${recordValidated.rowNumber}</span></ui5-table-cell>`
