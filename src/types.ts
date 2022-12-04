@@ -39,17 +39,26 @@ export interface record {
     value: string
 }
 
-export interface fieldValidated{
-id:string,
-value:string,
-errors: string[]
+export interface fieldValidated {
+    id: string,
+    value: string,
+    errors: string[]
 }
-export interface recordValidated{
-rowNumber: number,
-hasError: boolean,
-recordType: string,
-isUnknownRecordType: boolean,
-fields:fieldValidated[],
-rest: string,
-errors: string[]
+export interface recordValidated {
+    rowNumber: number,
+    hasError: boolean,
+    recordType: string,
+    isUnknownRecordType: boolean,
+    fields: fieldValidated[],
+    rest: string,
+    errors: string[]
+}
+
+export interface jsonHelperRecordTypeField {
+    recordTypeId: string,
+    fieldId: string,
+    fieldLength: number,
+    obligatory?: boolean,
+    allowedValues?: string,
+    regex?: string
 }

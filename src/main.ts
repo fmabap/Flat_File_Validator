@@ -4,7 +4,7 @@ import { fileStructure, recordValidated } from "./types";
 import { validateRecord } from "./validate";
 import { setDemoData } from "./demoData";
 import { getOutputTableForEachRecord, getOutputTableGroupedByRecordType } from "./output";
-import { setJsonFileFormatHelperDemoData } from "./jsonFileFormatHelper";
+import { setJsonFileFormatHelperDemoData, generateJSONFileFormat } from "./jsonFileFormatHelper";
 import "@ui5/webcomponents/dist/TextArea";
 import "@ui5/webcomponents/dist/Button";
 import "@ui5/webcomponents/dist/Label";
@@ -20,7 +20,7 @@ import "@ui5/webcomponents/dist/StandardListItem";
 import "@ui5/webcomponents/dist/Input";
 
 
-window.addEventListener("load", () => {init()});
+window.addEventListener("load", () => { init() });
 
 function init() {
   const ui5BtnDemo: any = document.getElementById("demo");
@@ -33,6 +33,11 @@ function init() {
     setJsonFileFormatHelperDemoData();
   });
 
+  const ui5BtnGenerateJFHelper: any = document.getElementById("generateJSON");
+  ui5BtnGenerateJFHelper.addEventListener("click", () => {
+    generateJSONFileFormat();
+  });
+
   const ui5BtnValidate: any = document.getElementById("validate");
   ui5BtnValidate.addEventListener("click", () => {
     validate();
@@ -40,7 +45,7 @@ function init() {
 
   const fileStructureSchema: any = document.getElementById("fileStructureSchema");
   fileStructureSchema.value =
-`{
+    `{
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description": "Flat File Validator JSON Schema for File Structure",
   "type": "object",
@@ -122,14 +127,14 @@ function init() {
 function validate() {
   const textAreaFileStructure: any = document.getElementById("fileStructure");
   const textAreaFileContent: any = document.getElementById("fileContent");
-  let fileStructure: fileStructure ;
+  let fileStructure: fileStructure;
   try {
-     fileStructure = JSON.parse(textAreaFileStructure.value);
+    fileStructure = JSON.parse(textAreaFileStructure.value);
   } catch (error) {
     alert(error);
     return;
   }
-  
+
   const fileStructureEnhanced = struct.enhanceFileStructure(fileStructure);
 
   const records = fileConv.fileToRecords(textAreaFileContent.value);
