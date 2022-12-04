@@ -14,7 +14,7 @@ The following things can be checked:
 
 ## JSON file format
 You can find the JSON file format schema [here](./json.schema.json) or including example data in the [tool](https://fmabap.github.io/Flat_File_Validator/) (just press the button "Fill with demo data"). You should use an external JSON schema validator. There is only an alert if the JSON could not be parsed.
-There is also a helper in the [tool](https://fmabap.github.io/Flat_File_Validator/) to generate the JSON from tab delimited data like in this [excel sheet](./Demo-File-Structure-Helper.xlsx).
+There is also a helper in the [tool](https://fmabap.github.io/Flat_File_Validator/) to generate the JSON from tab delimited data like in this [excel sheet](.public/Demo-File-Structure-Helper.xlsx).
 
 ## Offline mode
 The [tool](https://fmabap.github.io/Flat_File_Validator/) needs no server. You can download the repository, unzip it and just open the [index.html](./docs/index.html) in the [docs folder](./docs/) with a browser.

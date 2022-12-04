@@ -16,12 +16,25 @@ RT3	Field2	4			^TEST$`
 }
 
 export function generateJSONFileFormat() {
-    const recordTypeFieldPostion: any = document.getElementById("recordTypeFieldPostion");
-    const recordTypeFieldLength: any = document.getElementById("recordTypeFieldLength");
-    const fileStructureHelper: any = document.getElementById("fileStructureHelper");
-    const recordTypeFields: string[] = fileStructureHelper.value.split("\n");
-
     try {
+        const recordTypeFieldPostion: any = document.getElementById("recordTypeFieldPostion");
+        const recordTypeFieldLength: any = document.getElementById("recordTypeFieldLength");
+        const fileStructureHelper: any = document.getElementById("fileStructureHelper");
+        const recordTypeFields: string[] = fileStructureHelper.value.split("\n");
+
+        if (isInteger(recordTypeFieldPostion.value) === false) {
+            throw `Please enter an integer Record Type Field Position`;
+        }
+        if (recordTypeFieldPostion.value < 1) {
+            throw `The Record Type Field Position must be greater than 0`;
+        }
+        if (isInteger(recordTypeFieldLength.value) === false) {
+            throw `Please enter an integer Record Type Field Length`;
+        }
+        if (recordTypeFieldLength.value < 1) {
+            throw `The Record Type Field Length must be greater than 0`;
+        }
+
         const jsonHelperRecordTypeFields = getJsonHelperRecordTypeFields(recordTypeFields);
         const JSonFileFormat = getJsonFileFormat(recordTypeFieldPostion.value, recordTypeFieldLength.value, jsonHelperRecordTypeFields);
         const fileStructure: any = document.getElementById("fileStructure");
@@ -101,10 +114,24 @@ function getJsonHelperRecordTypeFields(recordTypesFields: string[]): jsonHelperR
                         break;
                 }
             })
+            if (jsonHelperRecordTypeField.recordTypeId === "") {
+                throw `Please enter the Record Type Id in row ${row + 1}`;
+            }
+            if (jsonHelperRecordTypeField.fieldId === "") {
+                throw `Please enter the Field Id in row ${row + 1}`;
+            }
+            if (jsonHelperRecordTypeField.fieldLength === 0) {
+                throw `Record Type: ${jsonHelperRecordTypeField.recordTypeId} Field: ${jsonHelperRecordTypeField.fieldId} the field length ${jsonHelperRecordTypeField.fieldLength} must be greater than 0`;
+            }
             jsonHelperRecordTypeFields.push(jsonHelperRecordTypeField);
 
         }
     })
+    if (jsonHelperRecordTypeFields.length === 0) {
+        throw "Please enter the Record Types";
+    }
+
+
     return jsonHelperRecordTypeFields;
 }
 
