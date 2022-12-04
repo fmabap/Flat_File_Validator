@@ -8,11 +8,11 @@ export function setDemoData() {
 
 function setDemoFileStructure() {
     const fileStructure: fileStructure = {
-        recordTypeLength: 3,
         recordTypePos: 1,
+        recordTypeLength: 3,
         recordTypes: [{
             id: "RT1", fields: [{ id: "RT", length: 3, obligatory: true, allowedValues: [], regex: "" },
-            { id: "Field2", length: 10, obligatory: false, allowedValues: ["BLA1"], regex: "" }],
+            { id: "Field2", length: 10, obligatory: false, allowedValues: ["BLA1", "BLA2"], regex: "" }],
         },
         {
             id: "RT2", fields: [{ id: "RT", length: 3, obligatory: true, allowedValues: [], regex: "" },
