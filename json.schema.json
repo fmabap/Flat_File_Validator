@@ -3,14 +3,14 @@
   "description": "Flat File Validator JSON Schema for File Structure",
   "type": "object",
   "properties": {
-    "recordTypeLength": {
-      "type": "integer",
-      "description": "Length of the record type field"
-    },
-    "recordTypePos": {
+     "recordTypePos": {
       "type": "integer",
       "description": "Position of the record type field in the records, starting from 1"
     },
+    "recordTypeLength": {
+      "type": "integer",
+      "description": "Length of the record type field"
+    },    
     "recordTypes": {
       "type": "array",
       "description": "Array with all record types",

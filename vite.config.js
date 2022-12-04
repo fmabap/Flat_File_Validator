@@ -3,8 +3,9 @@ import { defineConfig } from "vite";
 // vite.config.js
 export default defineConfig({
     // config options
-    base:"./",
+    base: "./",
     build: {
-        outDir: "./docs"
+        outDir: "./docs",
+        publicDir: "./public"
     }
-  });
+});

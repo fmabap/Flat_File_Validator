@@ -74,8 +74,8 @@ function getRecordTypeEnhanced(record: record, structExt: fileStructureEnhanced)
     if (record.value === null || record.value === "") {
         return undefined!;
     }
-    if (record.value.length < structExt.recordTypePos + structExt.recordTypeLength) {
-        let err: string = `The record is to short ${record.value.length} to have a record type at position ${structExt.recordTypePos} with the length ${structExt.recordTypeLength}.`
+    if (record.value.length < structExt.recordTypePos + structExt.recordTypeLength -1) {
+        let err: string = `The record is to short (${record.value.length}) to have a record type at position ${structExt.recordTypePos} with the length ${structExt.recordTypeLength}.`
         throw new Error(err);
     }
     const recordType: string = record.value.substring(structExt.recordTypePos - 1, structExt.recordTypePos - 1 + structExt.recordTypeLength);

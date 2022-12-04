@@ -4,6 +4,7 @@ import { fileStructure, recordValidated } from "./types";
 import { validateRecord } from "./validate";
 import { setDemoData } from "./demoData";
 import { getOutputTableForEachRecord, getOutputTableGroupedByRecordType } from "./output";
+import { setJsonFileFormatHelperDemoData, generateJSONFileFormat } from "./jsonFileFormatHelper";
 import "@ui5/webcomponents/dist/TextArea";
 import "@ui5/webcomponents/dist/Button";
 import "@ui5/webcomponents/dist/Label";
@@ -14,14 +15,27 @@ import "@ui5/webcomponents/dist/TableRow";
 import "@ui5/webcomponents/dist/TableCell";
 import "@ui5/webcomponents/dist/Panel";
 import "@ui5/webcomponents/dist/Checkbox";
+import "@ui5/webcomponents/dist/List";
+import "@ui5/webcomponents/dist/StandardListItem";
+import "@ui5/webcomponents/dist/Input";
 
 
-window.addEventListener("load", () => {init()});
+window.addEventListener("load", () => { init() });
 
 function init() {
   const ui5BtnDemo: any = document.getElementById("demo");
   ui5BtnDemo.addEventListener("click", () => {
     setDemoData();
+  });
+
+  const ui5BtnDemoJFHelper: any = document.getElementById("generateJSONDemo");
+  ui5BtnDemoJFHelper.addEventListener("click", () => {
+    setJsonFileFormatHelperDemoData();
+  });
+
+  const ui5BtnGenerateJFHelper: any = document.getElementById("generateJSON");
+  ui5BtnGenerateJFHelper.addEventListener("click", () => {
+    generateJSONFileFormat();
   });
 
   const ui5BtnValidate: any = document.getElementById("validate");
@@ -31,19 +45,19 @@ function init() {
 
   const fileStructureSchema: any = document.getElementById("fileStructureSchema");
   fileStructureSchema.value =
-`{
+    `{
   "$schema": "http://json-schema.org/draft-04/schema#",
   "description": "Flat File Validator JSON Schema for File Structure",
   "type": "object",
   "properties": {
-    "recordTypeLength": {
-      "type": "integer",
-      "description": "Length of the record type field"
-    },
     "recordTypePos": {
       "type": "integer",
       "description": "Position of the record type field in the records, starting from 1"
     },
+    "recordTypeLength": {
+      "type": "integer",
+      "description": "Length of the record type field"
+    }, 
     "recordTypes": {
       "type": "array",
       "description": "Array with all record types",
@@ -113,14 +127,14 @@ function init() {
 function validate() {
   const textAreaFileStructure: any = document.getElementById("fileStructure");
   const textAreaFileContent: any = document.getElementById("fileContent");
-  let fileStructure: fileStructure ;
+  let fileStructure: fileStructure;
   try {
-     fileStructure = JSON.parse(textAreaFileStructure.value);
+    fileStructure = JSON.parse(textAreaFileStructure.value);
   } catch (error) {
     alert(error);
     return;
   }
-  
+
   const fileStructureEnhanced = struct.enhanceFileStructure(fileStructure);
 
   const records = fileConv.fileToRecords(textAreaFileContent.value);
