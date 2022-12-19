@@ -13,6 +13,24 @@
       white-space: pre-wrap
     }
 
+    .center {
+      text-align: center;
+    }
+
+    .header {
+      padding: 10px 16px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .InputLabel {
+      height: var(--_ui5_input_height);
+      vertical-align: middle;
+    }
+
+    .checkBoxWithButtons {
+      height: 40px;
+    }
+
     .error {
       background-color: red;
       color: white;
@@ -23,8 +41,11 @@
 
 <body>
   <div id="app"></div>
-  <!-- Header -->
-  <ui5-title><a href="https://github.com/fmabap/Flat_File_Validator/">Flat File Validator</a></ui5-title>
+  <div class="header">
+    <!-- Header -->
+    <ui5-title class="center"><a href="https://github.com/fmabap/Flat_File_Validator/">Flat File Validator</a>
+    </ui5-title>
+  </div>
   <!-- JSON File Structure Schema -->
   <ui5-panel width="100%" accessible-role="Complementary" header-text="JSON File Structure Schema" class="full-width"
     collapsed="true">
@@ -50,18 +71,24 @@
       <ui5-li>6. A regex that the field must match in JSON style escaped, optional, example: ^T.*$ </ui5-li>
     </ui5-list>
     <br>
-    <ui5-label for="recordTypeFieldPostion">Record Type Field Position</ui5-label>
-    <ui5-input id="recordTypeFieldPostion" type="Number"></ui5-input>
-    <br>
-    <ui5-label for="recordTypeFieldLength">Record Type Field Length</ui5-label>
-    <ui5-input id="recordTypeFieldLength" type="Number"></ui5-input>
-    <br>
-    <br>
-    <ui5-label>Record Types</ui5-label>
+    <form>
+      <field>
+        <ui5-label for="recordTypeFieldPostion" show-colon="true" class="InputLabel">Record Type Field
+          Position</ui5-label>
+        <ui5-input id="recordTypeFieldPostion" type="Number"></ui5-input>
+      </field>
+      <field>
+        <ui5-label for="recordTypeFieldLength" show-colon="true" class="InputLabel">Record Type Field Length</ui5-label>
+        <ui5-input id="recordTypeFieldLength" type="Number"></ui5-input>
 
-    <ui5-textarea id="fileStructureHelper" growing="true" rows="5"></ui5-textarea>
-    <ui5-button id="generateJSONDemo">Fill with demo data</ui5-button>
-    <ui5-button id="generateJSON" design="Emphasized">Generate JSON File Structure</ui5-button>
+        <br>
+        <field>
+          <ui5-label>Record Types</ui5-label>
+          <ui5-textarea id="fileStructureHelper" growing="true" rows="5"></ui5-textarea>
+        </field>
+        <ui5-button id="generateJSONDemo">Fill with demo data</ui5-button>
+        <ui5-button id="generateJSON" design="Emphasized">Generate JSON File Structure</ui5-button>
+    </form>
   </ui5-panel>
 
   <!-- JSON File Structure -->
@@ -78,8 +105,9 @@
 
   <!-- Options and Actions -->
   <ui5-panel width="100%" accessible-role="Complementary" header-text="Options and Actions" class="full-width">
-    <ui5-checkbox id="chBShowOnlyErrors" text="Show only errors" checked></ui5-checkbox>
-    <ui5-checkbox id="chBGroupByRecordType" text="Group by record type" checked></ui5-checkbox>
+    <ui5-checkbox id="chBShowOnlyErrors" text="Show only errors" checked class="checkBoxWithButtons"></ui5-checkbox>
+    <ui5-checkbox id="chBGroupByRecordType" text="Group by record type" checked class="checkBoxWithButtons">
+    </ui5-checkbox>
     <ui5-button id="demo">Fill with demo data</ui5-button>
     <ui5-button id="validate" design="Emphasized">Validate</ui5-button>
   </ui5-panel>

@@ -129,6 +129,10 @@ function validate() {
   const textAreaFileContent: any = document.getElementById("fileContent");
   let fileStructure: fileStructure;
   try {
+    if (textAreaFileStructure.value === "") {
+      let err: string = `Please enter the JSON File Structure first`;
+      throw new Error(err);
+    }
     fileStructure = JSON.parse(textAreaFileStructure.value);
   } catch (error) {
     alert(error);
@@ -136,15 +140,11 @@ function validate() {
   }
 
   const fileStructureEnhanced = struct.enhanceFileStructure(fileStructure);
-
   const records = fileConv.fileToRecords(textAreaFileContent.value);
-
-
   let valPromises: Promise<recordValidated>[] = [];
 
   records.forEach(element => { valPromises.push(validateRecord(fileStructureEnhanced, element)) })
   Promise.all(valPromises).then((recordsValidated) => {
-
     const textAreaResult: any = document.getElementById("result");
     textAreaResult.value = JSON.stringify(recordsValidated, null, 2);
     const showOnlyErrors: any = document.getElementById("chBShowOnlyErrors")!;
