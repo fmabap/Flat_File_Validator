@@ -2,7 +2,7 @@ import * as fileConv from "./fileConv";
 import * as struct from "./struct";
 import { fileStructure, recordValidated } from "./types";
 import { validateRecord } from "./validate";
-import { setDemoData } from "./demoData";
+import { setDemoData, setDemoFile, setDemoFileStructure } from "./demoData";
 import { getOutputTableForEachRecord, getOutputTableGroupedByRecordType } from "./output";
 import { setJsonFileFormatHelperDemoData, generateJSONFileFormat } from "./jsonFileFormatHelper";
 import "@ui5/webcomponents/dist/TextArea";
@@ -18,7 +18,9 @@ import "@ui5/webcomponents/dist/Checkbox";
 import "@ui5/webcomponents/dist/List";
 import "@ui5/webcomponents/dist/StandardListItem";
 import "@ui5/webcomponents/dist/Input";
-
+import "@ui5/webcomponents/dist/TabContainer";
+import "@ui5/webcomponents/dist/Tab";
+import "@ui5/webcomponents/dist/TabSeparator";
 
 window.addEventListener("load", () => { init() });
 
@@ -26,6 +28,17 @@ function init() {
   const ui5BtnDemo: any = document.getElementById("demo");
   ui5BtnDemo.addEventListener("click", () => {
     setDemoData();
+  });
+
+  const ui5BtnDemoFileContent: any = document.getElementById("demoFileContent");
+  ui5BtnDemoFileContent.addEventListener("click", () => {
+    setDemoFile();
+  });
+
+
+  const ui5BtnDemoFileStructure: any = document.getElementById("demoFileStructure");
+  ui5BtnDemoFileStructure.addEventListener("click", () => {
+    setDemoFileStructure();
   });
 
   const ui5BtnDemoJFHelper: any = document.getElementById("generateJSONDemo");
@@ -39,7 +52,7 @@ function init() {
   });
 
   const ui5BtnValidate: any = document.getElementById("validate");
-  ui5BtnValidate.addEventListener("click", () => {
+  ui5BtnValidate.addEventListener("click", async () => {
     validate();
   });
 
@@ -160,7 +173,18 @@ function validate() {
 
     const divOutput: Element = document.getElementById("output")!;
     divOutput.innerHTML = output!;
+    const ui5TabContainerValidator: any = document.getElementById("tabContainerValidator");
 
+    // Select result tab
+    const items: any[] = ui5TabContainerValidator.allItems
+    items.forEach(tab => {
+      if (tab.id === "tabResult") {
+        tab.selected = true;
+      }
+      else {
+        tab.selected = false;
+      }
+    });
   });
 
 }
