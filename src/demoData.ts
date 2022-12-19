@@ -6,7 +6,7 @@ export function setDemoData() {
     setDemoFile();
 }
 
-function setDemoFileStructure() {
+export function setDemoFileStructure() {
     const fileStructure: fileStructure = {
         recordTypePos: 1,
         recordTypeLength: 3,
@@ -27,18 +27,18 @@ function setDemoFileStructure() {
     };
 
     const textAreaFileStructure: any = document.getElementById("fileStructure");
-    textAreaFileStructure.value = JSON.stringify(fileStructure,null,2);
+    textAreaFileStructure.value = JSON.stringify(fileStructure, null, 2);
 
 }
 
 export function setDemoFile() {
-const fileContent:string = `RT1BLA1
+    const fileContent: string = `RT1BLA1
 RT2BLABLUB
 UNKNOW_RECORD_TYPE
 
 RT3T  T
 RT3TEST
 RT3TES`;
-const textAreaFileContent: any = document.getElementById("fileContent");
-textAreaFileContent.value = fileContent;
+    const textAreaFileContent: any = document.getElementById("fileContent");
+    textAreaFileContent.value = fileContent;
 }

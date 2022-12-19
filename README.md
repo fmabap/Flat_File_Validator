@@ -19,7 +19,7 @@ There is also a helper in the [tool](https://fmabap.github.io/Flat_File_Validato
 ## Offline mode
 The [tool](https://fmabap.github.io/Flat_File_Validator/) needs no server. You can download the repository, unzip it and just open the [index.html](./docs/index.html) in the [docs folder](./docs/) with a browser.
 
-## Technical stuff
-The [tool](https://fmabap.github.io/Flat_File_Validator/) is created with [TypesScript](https://www.typescriptlang.org/). It uses [UI5 Web Components](https://sap.github.io/ui5-webcomponents/) and the [Vite Framework](https://vitejs.dev/).
- 
- 
+## Technical and legal stuff
+The own source code of the [Flat File Validator](https://fmabap.github.io/Flat_File_Validator/) is subject to the MIT license. But the tool has dependencies to frameworks that subjects also to other licenses. It is created with [TypesScript](https://www.typescriptlang.org/) (Apache-2.0 license). It uses [UI5 Web Components](https://sap.github.io/ui5-webcomponents/) (Apache-2.0 license) and the [Vite Framework](https://vitejs.dev/)(MIT license).
+
+The Vite Framework converts the TypeScript source code of the Flat File Validator together with the dependent source code into a single JavaScript file and minifies it. So it modifies also the dependent source code of the used frameworks. The used frameworks have additional dependencies. GitHub automatically lists the detected dependencies of this repository. You can find them [here](https://github.com/fmabap/Flat_File_Validator/network/dependencies). Please see also the documentation of the used frameworks for further information.

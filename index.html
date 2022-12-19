@@ -4,93 +4,162 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Flat File Validator">
+  <meta name="keywords"
+    content="flat file, validator, checker, fix length, record type, record types, table, UI5 Web Components">
   <title>Flat File Validator</title>
   <style>
     .renderWhiteSpaces {
       white-space: pre-wrap
     }
 
+    .center {
+      text-align: center;
+    }
+
+    .header {
+      padding: 10px 16px;
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .InputLabel {
+      height: var(--_ui5_input_height);
+      vertical-align: middle;
+    }
+
+    .checkBoxWithButtons {
+      height: 40px;
+    }
+
     .error {
       background-color: red;
       color: white;
     }
+
+    .scrollContainer {
+      overflow: auto;
+      height: 75vh;
+      width: 100%;
+    }
+
+    .tabContainerHeight {
+      height: 90vh;
+    }
   </style>
+
   <script type="module" src="/src/main.ts" defer></script>
 </head>
 
 <body>
   <div id="app"></div>
-  <!-- Header -->
-  <ui5-title>Flat File Validator</ui5-title>
-  <!-- JSON File Structure Schema -->
-  <ui5-panel width="100%" accessible-role="Complementary" header-text="JSON File Structure Schema" class="full-width"
-    collapsed="true">
-    <ui5-label>JSON File Structure Schema</ui5-label>
-    <ui5-textarea id="fileStructureSchema" growing="true" rows="5" readonly="true"></ui5-textarea>
-  </ui5-panel>
+  <div class="header">
+    <!-- Header -->
+    <ui5-title class="center"><a href="https://github.com/fmabap/Flat_File_Validator/">Flat File Validator</a>
+    </ui5-title>
+  </div>
 
-  <!-- JSON File Structure Schema Helper -->
-  <ui5-panel width="100%" accessible-role="Complementary" header-text="JSON File Structure Helper" class="full-width"
-    collapsed="true">
-    The JSON File Structure Helper helps you to generate the JSON File Structure. <br>
-    You have to enter the record type field position (starting from 1) and the length. <br>
-    Additional you have to enter the record types descriptions in the text area. Each attribute is separated by tab each
-    field of the record needs to be entered on a separated line <br>
-    You have to press ALT + 09 on your numpad of the keyboard to add a tab in the textarea. So it is easier to copy the
-    values from an excel sheet like <a href="./Demo-File-Structure-Helper.xlsx">this one</a>
-    <ui5-list header-text="You have to enter the following field attributes in the named order in one line">
-      <ui5-li>1. Record Type Id (name)</ui5-li>
-      <ui5-li>2. Field Id (name)</ui5-li>
-      <ui5-li>3. Field Length</ui5-li>
-      <ui5-li>4. Is the field obligatory (true or X / false), optional, default = false</ui5-li>
-      <ui5-li>5. Allowed values of the field in array style, optional, example: ["Value A", "Value B"]</ui5-li>
-      <ui5-li>6. A regex that the field must match in JSON style escaped, optional, example: ^T.*$ </ui5-li>
-    </ui5-list>
-    <br>
-    <ui5-label for="recordTypeFieldPostion">Record Type Field Position</ui5-label>
-    <ui5-input id="recordTypeFieldPostion" type="Number"></ui5-input>
-    <br>
-    <ui5-label for="recordTypeFieldLength">Record Type Field Length</ui5-label>
-    <ui5-input id="recordTypeFieldLength" type="Number"></ui5-input>
-    <br>
-    <br>
-    <ui5-label>Record Types</ui5-label>
+  <ui5-tabcontainer class="full-width tabContainerHeight" fixed="true" id="tabContainerValidator">
+    <ui5-tab text="JSON File Structure">
+      <div class="scrollContainer">
+        <!-- JSON File Structure Schema -->
+        <ui5-panel width="100%" accessible-role="Complementary" header-text="JSON File Structure Schema"
+          class="full-width" collapsed="true">
+          <ui5-label>JSON File Structure Schema</ui5-label>
+          <ui5-textarea id="fileStructureSchema" growing="true" rows="5" readonly="true">
+          </ui5-textarea>
+        </ui5-panel>
 
-    <ui5-textarea id="fileStructureHelper" growing="true" rows="5"></ui5-textarea>
-    <ui5-button id="generateJSONDemo">Fill with demo data</ui5-button>
-    <ui5-button id="generateJSON" design="Emphasized">Generate JSON File Structure</ui5-button>
-  </ui5-panel>
+        <!-- JSON File Structure Schema Helper -->
+        <ui5-panel width="100%" accessible-role="Complementary" header-text="JSON File Structure Helper"
+          class="full-width" collapsed="true">
+          The JSON File Structure Helper helps you to generate the JSON File Structure. <br>
+          You have to enter the record type field position (starting from 1) and the length. <br>
+          Additional you have to enter the record types descriptions in the text area. Each attribute is separated by
+          tab
+          each
+          field of the record needs to be entered on a separated line <br>
+          You have to press ALT + 09 on your numpad of the keyboard to add a tab in the textarea. So it is easier to
+          copy
+          the
+          values from an excel sheet like <a href="./Demo-File-Structure-Helper.xlsx">this one</a>
+          <ui5-list header-text="You have to enter the following field attributes in the named order in one line">
+            <ui5-li>1. Record Type Id (name)</ui5-li>
+            <ui5-li>2. Field Id (name)</ui5-li>
+            <ui5-li>3. Field Length</ui5-li>
+            <ui5-li>4. Is the field obligatory (true or X / false), optional, default = false</ui5-li>
+            <ui5-li>5. Allowed values of the field in array style, optional, example: ["Value A", "Value B"]</ui5-li>
+            <ui5-li>6. A regex that the field must match in JSON style escaped, optional, example: ^T.*$ </ui5-li>
+          </ui5-list>
+          <br>
+          <form>
+            <field>
+              <ui5-label for="recordTypeFieldPostion" show-colon="true" class="InputLabel">Record Type Field
+                Position</ui5-label>
+              <ui5-input id="recordTypeFieldPostion" type="Number"></ui5-input>
+            </field>
+            <field>
+              <ui5-label for="recordTypeFieldLength" show-colon="true" class="InputLabel">Record Type Field Length
+              </ui5-label>
+              <ui5-input id="recordTypeFieldLength" type="Number"></ui5-input>
 
-  <!-- JSON File Structure -->
-  <ui5-panel width="100%" accessible-role="Complementary" header-text="JSON File Structure" class="full-width">
-    <ui5-label>JSON File Structure</ui5-label>
-    <ui5-textarea id="fileStructure" growing="true" rows="5"></ui5-textarea>
+              <br>
+              <field>
+                <ui5-label>Record Types</ui5-label>
+                <ui5-textarea id="fileStructureHelper" growing="true" rows="10"></ui5-textarea>
+              </field>
+              <ui5-button id="generateJSONDemo">Fill with demo data</ui5-button>
+              <ui5-button id="generateJSON" design="Emphasized">Generate JSON File Structure</ui5-button>
+          </form>
+        </ui5-panel>
 
-  </ui5-panel>
-  <!-- File Content -->
-  <ui5-panel width="100%" accessible-role="Complementary" header-text="File Content" class="full-width">
-    <ui5-label>File Content</ui5-label>
-    <ui5-textarea id="fileContent" growing="true" rows="5"></ui5-textarea>
-  </ui5-panel>
+        <!-- JSON File Structure -->
+        <ui5-panel width="100%" accessible-role="Complementary" header-text="JSON File Structure" class="full-width">
+          <ui5-label>JSON File Structure</ui5-label>
+          <ui5-textarea id="fileStructure" growing="true" rows="10"></ui5-textarea>
+          <ui5-button id="demoFileStructure">Fill with demo data</ui5-button>
+        </ui5-panel>
+      </div>
+    </ui5-tab>
+    <ui5-tab text="File Content">
+      <div class="scrollContainer">
+        <!-- File Content -->
+        <ui5-label>File Content</ui5-label>
+        <ui5-textarea id="fileContent" growing="true" rows="10"></ui5-textarea>
+        <ui5-button id="demoFileContent">Fill with demo data</ui5-button>
+      </div>
+    </ui5-tab>
+    <ui5-tab text="Options and Actions">
+      <!-- Options and Actions -->
+      <div class="scrollContainer">
+        <ui5-panel width="100%" accessible-role="Complementary" header-text="Options" class="full-width">
+          <ui5-checkbox id="chBShowOnlyErrors" text="Show only errors" checked class="checkBoxWithButtons">
+          </ui5-checkbox>
+          <ui5-checkbox id="chBGroupByRecordType" text="Group by record type" checked class="checkBoxWithButtons">
+          </ui5-checkbox>
+        </ui5-panel>
+        <ui5-panel width="100%" accessible-role="Complementary" header-text="Actions" class="full-width">
+          <ui5-button id="demo">Fill JSON Structure and File Content with demo data</ui5-button>
+          <ui5-button id="validate" design="Emphasized">Validate</ui5-button>
+        </ui5-panel>
+      </div>
+    </ui5-tab>
 
-  <!-- Options and Actions -->
-  <ui5-panel width="100%" accessible-role="Complementary" header-text="Options and Actions" class="full-width">
-    <ui5-checkbox id="chBShowOnlyErrors" text="Show only errors" checked></ui5-checkbox>
-    <ui5-checkbox id="chBGroupByRecordType" text="Group by record type" checked></ui5-checkbox>
-    <ui5-button id="demo">Fill with demo data</ui5-button>
-    <ui5-button id="validate" design="Emphasized">Validate</ui5-button>
-  </ui5-panel>
+    <ui5-tab text="Result" id="tabResult">
+      <div class="scrollContainer">
+        <!-- Result JSON -->
+        <ui5-panel width="100%" accessible-role="Complementary" header-text="Result JSON" class="full-width"
+          collapsed="true">
+          <ui5-label>Result</ui5-label>
+          <ui5-textarea id="result" growing="true" rows="10"></ui5-textarea>
+        </ui5-panel>
+        <!-- Result Tables -->
+        <ui5-panel width="100%" accessible-role="Complementary" header-text="Result Tables" class="full-width">
+          <div id="output"></div>
+        </ui5-panel>
+      </div>
+    </ui5-tab>
+  </ui5-tabcontainer>
 
-  <!-- Result JSON -->
-  <ui5-panel width="100%" accessible-role="Complementary" header-text="Result JSON" class="full-width" collapsed="true">
-    <ui5-label>Result</ui5-label>
-    <ui5-textarea id="result" growing="true" rows="10"></ui5-textarea>
-  </ui5-panel>
-
-  <!-- Result Tables -->
-  <ui5-panel width="100%" accessible-role="Complementary" header-text="Result Tables" class="full-width">
-    <div id="output"></div>
-  </ui5-panel>
 
 
 </body>
