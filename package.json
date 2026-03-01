@@ -9,12 +9,12 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "typescript": "^5.3.3",
-    "vite": "^5.0.12",
-    "vite-plugin-singlefile": "^2.0.2"
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vite-plugin-singlefile": "^2.3.0"
   },
   "dependencies": {
-    "@ui5/webcomponents": "^1.21.2",
+    "@ui5/webcomponents": "^1.24.26",
     "flat-file-validator": "file:"
   }
 }
