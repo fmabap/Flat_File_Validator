@@ -1,5 +1,5 @@
 import { fileStructure } from "./types";
-import "@ui5/webcomponents/dist/TextArea";
+import "@ui5/webcomponents/dist/TextArea.js";
 
 export function setDemoData() {
     setDemoFileStructure();
